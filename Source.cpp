@@ -6,6 +6,11 @@ using namespace std;
 
 int const MAX = 500000;
 
+int max(int a, int b)
+{
+	return (a > b) ? a : b;
+}
+
 int ThuatToan1(int* a, int n)
 {
 	int res = 0;
@@ -31,19 +36,14 @@ int ThuatToan4(int* a, int n)
 	int sum = 0;
 	for (int i = 0; i < n; i++)
 	{
-		if (a[i] < sum + a[i])
-			sum += a[i];
-		else sum = a[i];
+		sum = max(sum + a[i], a[i]);
 		if (sum > res)
 			res = sum;
 	}
 	return res;
 }
 
-int max(int a, int b)
-{
-	return (a > b) ? a : b;
-}
+
 int res = INT_MIN;
 int ThuatToan3(int *a, int left, int right)
 {
