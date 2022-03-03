@@ -30,6 +30,21 @@ int ThuatToan1(int* a, int n)
 	return res;
 }
 
+int ThuatToan2(int* a, int n)
+{
+	int res = INT_MIN;
+	int sum = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum = 0;
+		for (int j = i; j < n; j++)
+		{
+			sum += a[j];
+			res = max(res, sum);
+		}
+	}
+	return res;
+}
 int ThuatToan4(int* a, int n)
 {
 	int res = INT_MIN;
@@ -44,8 +59,8 @@ int ThuatToan4(int* a, int n)
 }
 
 
-int res = INT_MIN;
-int ThuatToan3(int *a, int left, int right)
+int ans4 = INT_MIN;
+int ThuatToan3(int* a, int left, int right)
 {
 	int mid = left / 2 + right / 2;
 	int sum = 0;
@@ -68,11 +83,11 @@ int ThuatToan3(int *a, int left, int right)
 		right_sum = max(right_sum, sum);
 	}
 	if (left_sum == INT_MIN || right_sum == INT_MIN)
-		return res;
+		return ans4;
 	else
 	{
-		res = max(res, left_sum + right_sum);
-		return res;
+		ans4 = max(ans4, left_sum + right_sum);
+		return ans4;
 	}
 }
 
@@ -80,7 +95,7 @@ int main()
 {
 	clock_t start, end;
 	double time_used;
-	int test[] = { 10, 100, 1000, 5000, 10000, 100000, 200000, 300000, 400000, 500000};
+	int test[] = { 10, 100, 1000, 5000, 10000, 100000, 200000, 300000, 400000, 500000 };
 	int n = 0;
 	int* a = new int[MAX];
 	srand(time(NULL));
@@ -88,12 +103,18 @@ int main()
 	{
 		for (int i = 0; i < test[n]; i++)
 			a[i] = rand() % 1000 - 499;
-		
+
 		cout << "Testcase " << test[n] << " phan tu\n";
 		start = clock();
 		cout << "Ket qua Thuat Toan 1 O(n^3) : " << ThuatToan1(a, test[n]) << endl;
 		end = clock();
 		cout << "Thoi gian chay thuat toan 1 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; //thuat toan 1
+		cout << endl;
+
+		start = clock();
+		cout << "Ket qua Thuat Toan 2 O(n^2) : " << ThuatToan2(a, test[n]) << endl;
+		end = clock();
+		cout << "Thoi gian chay thuat toan 2 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; //thuat toan 2
 		cout << endl;
 
 		start = clock();
@@ -107,7 +128,7 @@ int main()
 		end = clock();
 		cout << "Thoi gian chay thuat toan 4 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; // thuat toan 4
 		cout << endl;
-		cout <<"///////////////////////////////////////////////////////" << endl;
+		cout << "///////////////////////////////////////////////////////" << endl;
 
 		n++;
 	}
