@@ -59,7 +59,7 @@ int ThuatToan4(int* a, int n)
 }
 
 
-int ans4 = INT_MIN;
+int ans3 = INT_MIN;
 int ThuatToan3(int* a, int left, int right)
 {
 	int mid = left / 2 + right / 2;
@@ -83,18 +83,18 @@ int ThuatToan3(int* a, int left, int right)
 		right_sum = max(right_sum, sum);
 	}
 	if (left_sum == INT_MIN || right_sum == INT_MIN)
-		return ans4;
+		return ans3;
 	else
 	{
-		ans4 = max(ans4, left_sum + right_sum);
-		return ans4;
+		ans3 = max(ans3, left_sum + right_sum);
+		return ans3;
 	}
 }
 
 int main()
 {
 	clock_t start, end;
-	double time_used;
+	
 	int test[] = { 10, 100, 1000, 5000, 10000, 100000, 200000, 300000, 400000, 500000 };
 	int n = 0;
 	int* a = new int[MAX];
@@ -108,25 +108,26 @@ int main()
 		start = clock();
 		cout << "Ket qua Thuat Toan 1 O(n^3) : " << ThuatToan1(a, test[n]) << endl;
 		end = clock();
-		cout << "Thoi gian chay thuat toan 1 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; //thuat toan 1
+		cout << "Thoi gian chay thuat toan 1 : " << (float)(end - start) / CLOCKS_PER_SEC << endl; //thuat toan 1
 		cout << endl;
 
 		start = clock();
 		cout << "Ket qua Thuat Toan 2 O(n^2) : " << ThuatToan2(a, test[n]) << endl;
 		end = clock();
-		cout << "Thoi gian chay thuat toan 2 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; //thuat toan 2
+		cout << "Thoi gian chay thuat toan 2 : " << (float)(end - start) / CLOCKS_PER_SEC << endl; //thuat toan 2
 		cout << endl;
 
 		start = clock();
+		ans3 = INT_MIN;
 		cout << "Ket qua Thuat Toan 3 O(nlogn) : " << ThuatToan3(a, 0, test[n] - 1) << endl;
 		end = clock();
-		cout << "Thoi gian chay thuat toan 3 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; // thuat toan 3
+		cout << "Thoi gian chay thuat toan 3 : " << (float)(end - start) / CLOCKS_PER_SEC << endl; // thuat toan 3
 		cout << endl;
 
 		start = clock();
 		cout << "Ket qua Thuat Toan 4 O(n) : " << ThuatToan4(a, test[n]) << endl;
 		end = clock();
-		cout << "Thoi gian chay thuat toan 4 : " << (double)(end - start) / CLOCKS_PER_SEC << endl; // thuat toan 4
+		cout << "Thoi gian chay thuat toan 4 : " << (float)(end - start) / CLOCKS_PER_SEC << endl; // thuat toan 4
 		cout << endl;
 		cout << "///////////////////////////////////////////////////////" << endl;
 
